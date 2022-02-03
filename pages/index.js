@@ -16,9 +16,9 @@ const style = {
 export default function Home() {
   const { address, connectWallet } = useWeb3()
 
-  const welcomeUser = ( username, toastHandler = toast ) => {
+  const welcomeUser = (userName, toastHandler = toast) => {
     toastHandler.success(
-      `Welcome back ${username !== 'unnamed' ? `${username}`: ''}!`,
+      `Welcome back${userName !== 'Unnamed' ? ` ${userName}` : ''}!`,
       {
         style: {
           background: '#04111d',
@@ -34,13 +34,13 @@ export default function Home() {
       const userDoc = {
         _type: 'users',
         _id: address,
-        username: 'Unnamed',
+        userName: 'Unnamed',
         walletAddress: address,
       }
 
       const result = await client.createIfNotExists(userDoc)
 
-      welcomeUser(result.username)
+      welcomeUser(result.userName)
     })()
   }, [address])
 
