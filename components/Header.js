@@ -2,6 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import openseaLogo from '../assets/opensea.png'
+import { AiOutlineSearch } from 'react-icons/ai'
+import { CgProfile } from 'react-icons/cg'
+import { MdOutlineAccountBalanceWallet } from 'react-icons/md'
 
 // Tailwind CSS
 const style = {
@@ -25,7 +28,29 @@ const Header = () => {
           <div className={style.logoText}>OpenSea</div>
         </div>
       </Link>
-      <div className={style.searchBar}></div>
+      <div className={style.searchBar}>
+        <div className={style.searchIcon}>
+          <AiOutlineSearch />
+        </div>
+        <input
+          className={style.searchInput}
+          placeholder="Search items, Collections and accounts"
+        />
+      </div>
+      <div className={style.headerItems}>
+        <Link href="/collections/0x80EEedEFD02199115886e682629A7d03D4324102">
+          <div className={style.headerItem}>Collections</div>
+        </Link>
+        <div className={style.headerItem}>Resources</div>
+        <div className={style.headerItem}>Stats</div>
+        <div className={style.headerItem}>Create</div>
+        <div className={style.headerIcon}>
+          <CgProfile />
+        </div>
+        <div className={style.headerIcon}>
+          <MdOutlineAccountBalanceWallet />
+        </div>
+      </div>
     </div>
   )
 }
