@@ -43,7 +43,7 @@ const Collection = () => {
 
     const sdk = new ThirdwebSDK(
       provider.getSigner(),
-      'https://eth-mainnet.alchemyapi.io/v2/0uRjjfL6i6R-J-9Zatc-EmzW-kk06VRC'
+      'https://eth-rinkeby.alchemyapi.io/v2/6n3kES0K3uca0qrbuzQ7r2IdPNz9WsL-'
     )
     return sdk.getNFTModule(collectionId)
   }, [provider])
