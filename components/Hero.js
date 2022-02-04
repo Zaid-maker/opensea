@@ -27,8 +27,7 @@ const Hero = () => {
               Discover, collect, and sell extraordinary NFTs
             </div>
             <div className={style.description}>
-              Opensea is the world&apos;s first and largest Marketplace for
-              NFTs.
+              OpenSea is the world&apos;s first and largest NFT marketplace
             </div>
             <div className={style.ctaContainer}>
               <button className={style.accentedButton}>Explore</button>
@@ -39,7 +38,7 @@ const Hero = () => {
             <img
               className="rounded-t-lg"
               src="https://lh3.googleusercontent.com/ujepnqpnL0nDQIHsWxlCXzyw4pf01yjz1Jmb4kAQHumJAPrSEj0-e3ABMZlZ1HEpJoqwOcY_kgnuJGzfXbd2Tijri66GXUtfN2MXQA=s550"
-              alt="Opensea"
+              alt=""
             />
             <div className={style.infoContainer}>
               <img
@@ -53,7 +52,7 @@ const Hero = () => {
                   className="text-[#1868b7]"
                   href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/2324922113504035910649522729980423429926362207300810036887725141691069366277"
                 >
-                  Hola-kanola
+                  hola-kanola
                 </a>
               </div>
             </div>

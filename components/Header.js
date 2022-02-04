@@ -1,12 +1,11 @@
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 import openseaLogo from '../assets/opensea.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md'
 
-// Tailwind CSS
 const style = {
   wrapper: `bg-[#04111d] w-screen px-[1.2rem] py-[0.8rem] flex `,
   logoContainer: `flex items-center cursor-pointer`,
@@ -24,8 +23,8 @@ const Header = () => {
     <div className={style.wrapper}>
       <Link href="/">
         <div className={style.logoContainer}>
-          <Image src={openseaLogo} width={40} height={40} />
-          <div className={style.logoText}>OpenSea</div>
+          <Image src={openseaLogo} height={40} width={40} />
+          <div className={style.logoText}>Opensea</div>
         </div>
       </Link>
       <div className={style.searchBar}>
@@ -34,16 +33,16 @@ const Header = () => {
         </div>
         <input
           className={style.searchInput}
-          placeholder="Search items, Collections and accounts"
+          placeholder="Search items, collections, and accounts"
         />
       </div>
       <div className={style.headerItems}>
         <Link href="/collections/0x80EEedEFD02199115886e682629A7d03D4324102">
-          <div className={style.headerItem}>Collections</div>
+          <div className={style.headerItem}> Collections </div>
         </Link>
-        <div className={style.headerItem}>Resources</div>
-        <div className={style.headerItem}>Stats</div>
-        <div className={style.headerItem}>Create</div>
+        <div className={style.headerItem}> Stats </div>
+        <div className={style.headerItem}> Resources </div>
+        <div className={style.headerItem}> Create </div>
         <div className={style.headerIcon}>
           <CgProfile />
         </div>
