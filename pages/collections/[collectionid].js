@@ -7,6 +7,7 @@ import Header from '../../components/Header'
 import { CgWebsite } from 'react-icons/cg'
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
 import { HiDotsVertical } from 'react-icons/hi'
+import { client } from '../../lib/sanityClient'
 
 const style = {
   bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -43,7 +44,7 @@ const Collection = () => {
 
     const sdk = new ThirdwebSDK(
       provider.getSigner(),
-      'https://eth-rinkeby.alchemyapi.io/v2/6n3kES0K3uca0qrbuzQ7r2IdPNz9WsL-'
+      'https://rinkeby.infura.io/v3/a464b9152d8c466c8a94a514fce8e837'
     )
     return sdk.getNFTModule(collectionId)
   }, [provider])
@@ -64,9 +65,9 @@ const Collection = () => {
 
     const sdk = new ThirdwebSDK(
       provider.getSigner(),
-      'https://eth-mainnet.alchemyapi.io/v2/0uRjjfL6i6R-J-9Zatc-EmzW-kk06VRC'
+      'https://eth-rinkeby.alchemyapi.io/v2/r89b1DgRK4U4DKv2jT7qXzawb0UHwBGm'
     )
-    return sdk.getMarketPlaceModule(
+    return sdk.getMarketplaceModule(
       '0x80EEedEFD02199115886e682629A7d03D4324102'
     )
   }, [provider])
@@ -106,8 +107,19 @@ const Collection = () => {
   console.log(router.query)
   console.log(router.query.collectionId)
   return (
-    <div className={overflow-hidden}>
+    <div className="overflow-hidden">
       <Header />
+      <div className={style.bannerImageContainer}>
+        <img
+          src={
+            collection?.bannerImageUrl
+              ? collection.bannerImageUrl
+              : 'https://via.placeholder.com/200'
+          }
+          alt="banner"
+          className={style.bannerImage}
+        />
+      </div>
     </div>
   )
 }
