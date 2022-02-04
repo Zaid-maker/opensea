@@ -8,6 +8,7 @@ import { CgWebsite } from 'react-icons/cg'
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
 import { HiDotsVertical } from 'react-icons/hi'
 import { client } from '../../lib/sanityClient'
+import NFTcard from '../../components/NFTcard'
 
 const style = {
   bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -33,92 +34,68 @@ const style = {
 
 const Collection = () => {
   const router = useRouter()
-  const { provider } = useWeb3()
-  const { collectionId } = router.query
   const [collection, setCollection] = useState({})
-  const [nfts, setNfts] = useState([])
-  const [listings, setListings] = useState([])
-
-  const nftModule = useMemo(() => {
-    if (!provider) return
-
-    const sdk = new ThirdwebSDK(
-      provider.getSigner(),
-      'https://rinkeby.infura.io/v3/a464b9152d8c466c8a94a514fce8e837'
-    )
-    return sdk.getNFTModule(collectionId)
-  }, [provider])
-
-  //get all nfts in collection
-  useEffect(() => {
-    if (!nftModule) return
-    ;(async () => {
-      const nfts = await nftModule.getAll()
-
-      setNfts(nfts)
-    })()
-  }, [nftModule])
-
-  //marketPlaceModule
-  const marketPlaceModule = useMemo(() => {
-    if (!provider) return
-
-    const sdk = new ThirdwebSDK(
-      provider.getSigner(),
-      'https://eth-rinkeby.alchemyapi.io/v2/r89b1DgRK4U4DKv2jT7qXzawb0UHwBGm'
-    )
-    return sdk.getMarketplaceModule(
-      '0x80EEedEFD02199115886e682629A7d03D4324102'
-    )
-  }, [provider])
-
-  //get all the listings in the collection
-  useEffect(() => {
-    if (!marketPlaceModule) return
-    ;(async () => {
-      setListings(await marketPlaceModule.getAllListings())
-    })()
-  }, [marketPlaceModule])
-
-  const fetchCollectionData = async (sanityClient = client) => {
-    const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
-      "imageUrl": profileImage.asset->url,
-      "bannerImageUrl": bannerImage.asset->url,
-      volumeTraded,
-      createdBy,
-      contractAddress,
-      "creator": createdBy->userName,
-      title, floorPrice,
-      "allOwners": owners[]->,
-      description
-    }`
-
-    const collectionData = await sanityClient.fetch(query)
-
-    console.log(collectionData, '😍❤')
-
-    await setCollection(collectionData[0])
-  }
-
-  useEffect(() => {
-    fetchCollectionData()
-  }, [collectionId])
 
   console.log(router.query)
-  console.log(router.query.collectionId)
+  console.log(router.query.collectionid)
   return (
     <div className="overflow-hidden">
       <Header />
       <div className={style.bannerImageContainer}>
         <img
+          className={style.bannerImage}
           src={
             collection?.bannerImageUrl
               ? collection.bannerImageUrl
               : 'https://via.placeholder.com/200'
           }
-          alt="banner"
-          className={style.bannerImage}
+          alt="BANNER"
         />
+      </div>
+      <div className={style.infoContainer}>
+        <div className={style.midRow}>
+          <img
+            className={style.profileImg}
+            src={
+              collection?.imageUrl
+                ? collection.imageUrkl
+                : 'https://via.placeholder.com/200'
+            }
+            alt="PROFILE"
+          />
+        </div>
+        <div className={style.endRow}>
+          <div className={style.socialIconsContainer}>
+            <div className={style.socialIconsWrapper}>
+              <div className={style.socialIconsContent}>
+                <div className={style.socialIcon}>
+                  <CgWebsite />
+                </div>
+                <div className={style.divider} />
+                <div className={style.socialIcon}>
+                  <AiOutlineInstagram />
+                </div>
+                <div className={style.divider} />
+                <div className={style.socialIcon}>
+                  <AiOutlineTwitter />
+                </div>
+                <div className={style.divider} />
+                <div className={style.socialIcon}>
+                  <HiDotsVertical />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={style.midRow}>
+          <div className={style.title}>{collection?.title}</div>
+        </div>
+        <div className={style.midRow}>
+          <div className={style.createdBy}>
+            Created by{' '}
+            <span className="text-[#2081e2]">{collection?.createdBy}</span>
+          </div>
+        </div>
       </div>
     </div>
   )
