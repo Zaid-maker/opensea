@@ -67,7 +67,7 @@ const Collection = () => {
       'https://eth-mainnet.alchemyapi.io/v2/0uRjjfL6i6R-J-9Zatc-EmzW-kk06VRC'
     )
     return sdk.getMarketPlaceModule(
-      '0x5E60cE392096bf720752EC7b7E4B0824c89116cb'
+      '0x80EEedEFD02199115886e682629A7d03D4324102'
     )
   }, [provider])
 
@@ -106,9 +106,9 @@ const Collection = () => {
   console.log(router.query)
   console.log(router.query.collectionId)
   return (
-    <Link href="/">
-      <h2>{router.query.collectionId}</h2>
-    </Link>
+    <div className={overflow-hidden}>
+      <Header />
+    </div>
   )
 }
 
