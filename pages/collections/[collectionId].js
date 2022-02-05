@@ -179,9 +179,23 @@ const Collection = () => {
                 />
                 {collection?.floorPrice}
               </div>
-              <div className={style.statName}>floor price</div>
+              <div className={style.statName}>Floor Price</div>
+            </div>
+            <div className={style.collectionStat}>
+              <div className={style.statValue}>
+                <img
+                  src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                  alt="eth"
+                  className={style.ethLogo}
+                />
+                {collection?.volumeTraded}.5k
+              </div>
+              <div className={style.statName}>Volume Traded</div>
             </div>
           </div>
+        </div>
+        <div className={style.midRow}>
+          <div className={style.description}>{collection?.description}</div>
         </div>
       </div>
     </div>
