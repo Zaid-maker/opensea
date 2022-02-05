@@ -34,11 +34,74 @@ const style = {
 
 const Collection = () => {
   const router = useRouter()
+  const { provider } = useWeb3()
   const { collectionId } = router.query
   const [collection, setCollection] = useState({})
+  const [nfts, setNfts] = useState([])
+  const [listings, setListings] = useState([])
+
+  const nftModule = useMemo(() => {
+    if (!provider) return
+
+    const sdk = new ThirdwebSDK(provider)
+    return sdk.getNFTModule(collectionId)
+  }, [provider])
+
+  // get all NFTs in the collection
+  useEffect(() => {
+    if (!nftModule) return
+    ;(async () => {
+      const nfts = await nftModule.getAll()
+
+      setNfts(nfts)
+    })()
+  }, [nftModule])
+
+  //marketPlaceModule
+  const marketPlaceModule = useMemo(() => {
+    if (!provider) return
+
+    const sdk = new ThirdwebSDK(provider)
+    return sdk.getMarketplaceModule(
+      '0x5E60cE392096bf720752EC7b7E4B0824c89116cb'
+    )
+  }, [])
+
+  // get all listings in the collection
+  useEffect(() => {
+    if (!marketPlaceModule) return
+    ;(async () => {
+      setListings(await marketPlaceModule.getAllListings())
+    })()
+  }, [marketPlaceModule])
+
+  // fetch collection data
+  const fetchCollectionData = async (sanityClient = client) => {
+    const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
+      "imageUrl": profileImage.asset->url,
+      "bannerImageUrl": bannerImage.asset->url,
+      volumeTraded,
+      createdBy,
+      contractAddress,
+      "creator": createdBy->userName,
+      title, floorPrice,
+      "allOwners": owners[]->,
+      description
+    }`
+
+    const collectionData = await sanityClient.fetch(query)
+
+    console.log(collectionData, '🔥')
+
+    await setCollection(collectionData[0])
+  }
+
+  useEffect(() => {
+    fetchCollectionData()
+  }, [collectionId])
 
   console.log(router.query)
-  console.log(collectionId)
+  console.log(router.query.collectionId)
   return (
     <div className="overflow-hidden">
       <Header />
@@ -95,6 +158,30 @@ const Collection = () => {
           <div className={style.createdBy}>
             Created by{' '}
             <span className="text-[#2081e2]">{collection?.createdBy}</span>
+          </div>
+        </div>
+        <div className={style.midRow}>
+          <div className={style.statsContainer}>
+            <div className={style.collectionStat}>
+              <div className={style.statValue}>{nfts.length}</div>
+              <div className={style.statName}>Items</div>
+            </div>
+            <div className={style.collectionStat}>
+              <div className={style.statValue}>
+                {collection?.allOwners ? collection.allOwners.length : ''}
+              </div>
+              <div className={style.statName}>Owners</div>
+            </div>
+            <div className={style.collectionStat}>
+              <div className={style.statValue}>
+                <img
+                  className={style.ethLogo}
+                  alt="ETH"
+                  src="https://cdn.worldvectorlogo.com/logos/ethereum-1.svg"
+                />
+                {collection?.floorPrice}
+              </div>
+            </div>
           </div>
         </div>
       </div>
