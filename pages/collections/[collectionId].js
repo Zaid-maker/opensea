@@ -155,7 +155,7 @@ const Collection = () => {
         <div className={style.midRow}>
           <div className={style.createdBy}>
             Created by{' '}
-            <span className="text-[#2081e2]">{collection?.createdBy}</span>
+            <span className="text-[#2081e2]">{collection?.creator}</span>
           </div>
         </div>
         <div className={style.midRow}>
