@@ -30,15 +30,14 @@ const NFTCard = ({ nftItem, title, listings }) => {
       setPrice(listing.buyoutCurrencyValuePerToken.displayValue)
     }
   }, [listings, nftItem])
+
   return (
     <div
       className={style.wrapper}
       onClick={() => {
         Router.push({
           pathname: `/nfts/${nftItem.id}`,
-          query: {
-            isListed: isListed,
-          },
+          query: { isListed: isListed },
         })
       }}
     >
@@ -48,8 +47,8 @@ const NFTCard = ({ nftItem, title, listings }) => {
       <div className={style.details}>
         <div className={style.info}>
           <div className={style.infoLeft}>
-            <p className={style.collectionName}>{title}</p>
-            <p className={style.assetName}>{nftItem.name}</p>
+            <div className={style.collectionName}>{title}</div>
+            <div className={style.assetName}>{nftItem.name}</div>
           </div>
           {isListed && (
             <div className={style.infoRight}>
