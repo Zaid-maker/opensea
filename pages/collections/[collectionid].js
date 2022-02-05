@@ -34,10 +34,11 @@ const style = {
 
 const Collection = () => {
   const router = useRouter()
+  const { collectionId } = router.query
   const [collection, setCollection] = useState({})
 
   console.log(router.query)
-  console.log(router.query.collectionid)
+  console.log(collectionId)
   return (
     <div className="overflow-hidden">
       <Header />
