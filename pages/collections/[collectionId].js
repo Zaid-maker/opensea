@@ -8,7 +8,7 @@ import { CgWebsite } from 'react-icons/cg'
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
 import { HiDotsVertical } from 'react-icons/hi'
 import { client } from '../../lib/sanityClient'
-import NFTcard from '../../components/NFTcard'
+import NFTCard from '../../components/NFTcard'
 
 const style = {
   bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -198,14 +198,14 @@ const Collection = () => {
           <div className={style.description}>{collection?.description}</div>
         </div>
       </div>
-      <div className="flex flex-wrap">
-        {nfts.map((nftItem) => (
-        <NFTcard
-          key={id}
-          nftItem={nftItem}
-          title={collection?.title}
-          listings={listings}
-        />
+      <div className="flex flex-wrap ">
+        {nfts.map((nftItem, id) => (
+          <NFTCard
+            key={id}
+            nftItem={nftItem}
+            title={collection?.title}
+            listings={listings}
+          />
         ))}
       </div>
     </div>

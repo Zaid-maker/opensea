@@ -1,7 +1,7 @@
 import React from 'react';
 
-const NFTcard = ({ nftItem }) => {
+const NFTCard = ({ nftItem }) => {
   return <img src={nftItem.image} />;
 };
 
-export default NFTcard;
+export default NFTCard;
